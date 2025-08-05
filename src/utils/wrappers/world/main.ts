@@ -62,7 +62,7 @@ export default class World {
     this.RunCommand(`tickingarea remove "${id}"`);
   }
 
-  public static SetProperty<T>(id: string, data: Partial<T>): void {
+  public static SetProperty<T>(id: string, data?: Partial<T>): void {
     server.world.setDynamicProperty(id, JSON.stringify(data));
   }
   public static GetProperty<T>(id: string): T | undefined {
