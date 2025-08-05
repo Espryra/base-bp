@@ -21,6 +21,9 @@ export default class Member {
   public EntityID(): string {
     return this.player.id;
   }
+  public Player(): Player {
+    return this.player;
+  }
 
   public Location(): Vector3 {
     return this.player.location;
