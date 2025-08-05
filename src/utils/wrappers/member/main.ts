@@ -213,7 +213,7 @@ export default class Member {
 
     return new Promise((resolve) => {
       const loop = system.runInterval(() => {
-        if (World.FindMember(this.EntityID())) {
+        if (!World.FindMember(this.EntityID())) {
           system.clearRun(loop);
 
           resolve();
