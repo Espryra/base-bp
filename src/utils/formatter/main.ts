@@ -1,5 +1,5 @@
 import type { Vector3 } from "@minecraft/server";
-import Logger from "../logger";
+import Logger from "../logger/main";
 
 export default class Formatter {
   public static ToShort(number: number): string {

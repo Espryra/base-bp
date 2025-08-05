@@ -1,8 +1,8 @@
 import * as server from "@minecraft/server";
-import Member from "../member";
+import Member from "../member/main";
 import Config from "../../../lib/config";
-import UUID from "../../uuid";
-import Sleep from "../../sleep";
+import UUID from "../../uuid/main";
+import Sleep from "../../sleep/main";
 import type { InventoryItem } from "../member/types";
 
 export default class World {

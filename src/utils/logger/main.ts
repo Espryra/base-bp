@@ -1,5 +1,5 @@
 import Config from "../../lib/config";
-import Time from "../time";
+import Time from "../time/main";
 
 export default class Logger {
   public static Info(...data: any[]) {

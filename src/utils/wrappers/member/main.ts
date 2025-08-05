@@ -8,7 +8,7 @@ import {
   type Vector3,
 } from "@minecraft/server";
 import Config from "../../../lib/config";
-import Sleep from "../../sleep";
+import Sleep from "../../sleep/main";
 import type { EquipmentItem, InventoryItem, MixedItem } from "./types";
 
 export default class Member {
