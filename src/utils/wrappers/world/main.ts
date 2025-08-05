@@ -156,4 +156,12 @@ export default class World {
     this.Broadcast(Config.colors.error + message);
     this.PlaySound("error");
   }
+
+  public static SpawnItem(
+    item: server.ItemStack,
+    location: server.Vector3,
+    dimension = this.Overworld(),
+  ): void {
+    dimension.spawnItem(item, location);
+  }
 }
