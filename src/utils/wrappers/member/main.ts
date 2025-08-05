@@ -10,6 +10,7 @@ import {
 import Config from "../../../lib/config";
 import Sleep from "../../sleep/main";
 import type { EquipmentItem, InventoryItem, MixedItem } from "./types";
+import World from "../world/main";
 
 export default class Member {
   public constructor(private readonly player: Player) {}
@@ -207,11 +208,18 @@ export default class Member {
     }
   }
 
-  public Moved(ticks: number): Promise<boolean> {
+  public Moved(): Promise<void> {
     const location = this.Location();
 
     return new Promise((resolve) => {
       const loop = system.runInterval(() => {
+        if (World.FindMember(this.EntityID())) {
+          system.clearRun(loop);
+
+          resolve();
+          return;
+        }
+
         const current = this.Location();
 
         if (
@@ -221,16 +229,10 @@ export default class Member {
           return;
         }
 
-        system.clearRun(fallover);
         system.clearRun(loop);
 
-        resolve(true);
+        resolve();
       });
-      const fallover = system.runTimeout(() => {
-        system.clearRun(loop);
-
-        resolve(false);
-      }, ticks);
     });
   }
 }
