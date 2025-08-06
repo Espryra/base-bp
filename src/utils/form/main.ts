@@ -19,7 +19,7 @@ export default class Form {
     for (const button of buttons) {
       const { text, icon, subtext } = button;
 
-      form.button(text + !subtext ? "" : `\n§7[ ${subtext}§r §7]`, icon);
+      form.button(text + (subtext ? `\n§7[ ${subtext}§r §7]` : ""), icon);
     }
 
     //@ts-ignore This is here because the types are very strict on the ::show method.
