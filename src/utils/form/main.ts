@@ -4,11 +4,12 @@ import {
   ModalFormResponse,
   type ActionFormResponse,
 } from "@minecraft/server-ui";
-import type { ActionForm, ModalForm } from "./types";
+import { ChestFormData } from "./chestUI/forms";
+import type { ActionForm, ChestForm, ChestFormItem, ModalForm } from "./types";
 
 export default class Form {
   public static async ActionForm(
-    data: ActionForm,
+    data: ActionForm
   ): Promise<ActionFormResponse> {
     const { member, buttons, body, title } = data;
     const form = new ActionFormData();
@@ -70,5 +71,41 @@ export default class Form {
 
     //@ts-ignore This is here because the types are very strict on the ::show method.
     return await form.show(member.Player());
+  }
+  /**
+   * This will require you to have the chestUI resource pack installed!
+   */
+  public static async ChestForm(data: ChestForm): Promise<ActionFormResponse> {
+    const form = new ChestFormData(data.size);
+
+    if (data.title) {
+      form.title(data.title);
+    }
+    if (data.pattern) {
+      const keys: Record<string, ChestFormItem> = {};
+
+      for (const key of data.pattern.keys) {
+        keys[key.character] = {
+          ...key,
+        };
+      }
+
+      form.pattern(data.pattern.lines, keys);
+    }
+    if (data.buttons) {
+      for (const button of data.buttons) {
+        form.button(
+          button.slot,
+          button.itemName,
+          button.itemDescription,
+          button.texture,
+          button.stackSize,
+          button.durability,
+          button.enchanted
+        );
+      }
+    }
+
+    return form.show(data.member.Player());
   }
 }

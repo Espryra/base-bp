@@ -61,3 +61,40 @@ export type ModalFormHeader = {
   type: "header";
   header: string;
 };
+
+export type ChestFormSizes =
+  | "small"
+  | "single"
+  | "large"
+  | "double"
+  | "5"
+  | "9"
+  | "18"
+  | "27"
+  | "36"
+  | "45"
+  | "54";
+export interface ChestFormItem {
+  itemName: string;
+  itemDescription: string[];
+  stackSize: number;
+  enchanted: boolean;
+  durability: number;
+  texture: string;
+}
+export interface ChestFormKey extends ChestFormItem {
+  character: string;
+}
+export interface ChestFormButton extends ChestFormItem {
+  slot: number;
+}
+export type ChestForm = {
+  title?: string;
+  size: ChestFormSizes;
+  member: Member;
+  buttons?: ChestFormButton[];
+  pattern?: {
+    lines: string[];
+    keys: ChestFormKey[];
+  };
+};
