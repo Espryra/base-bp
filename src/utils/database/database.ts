@@ -6,7 +6,7 @@ import {
 } from "@minecraft/server";
 
 export default class Database<T> {
-  public cache: Record<string, T> = {};
+  private cache: Record<string, T> = {};
 
   public constructor(
     private name: string,
