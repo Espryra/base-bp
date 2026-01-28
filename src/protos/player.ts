@@ -15,7 +15,7 @@ Player.prototype.sendError = function (message) {
 };
 Player.prototype.sendSuccess = function (message) {
   this.sendMessage(`§a${message}`);
-  system.run(() => this.playSound("random.pling"));
+  system.run(() => this.playSound("note.pling"));
 };
 
 Player.prototype.addItem = function (item) {
