@@ -57,7 +57,13 @@ export default class Database<T> {
     return this.Keys().map((key) => this.Get(key)!);
   }
   public Entries() {
-    return this.Keys().map((key) => [key, this.Get(key)!]);
+    const record: Record<string, T> = {};
+
+    this.Keys().forEach((key) => {
+      record[key] = this.Get(key)!;
+    });
+
+    return Object.entries(record);
   }
   public Clear() {
     this.cache = {};
