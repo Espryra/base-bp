@@ -29,5 +29,6 @@
     // Compiling
     "rootDir": "src",
     "outDir": "scripts"
-  }
+  },
+  "include": ["src"]
 }
