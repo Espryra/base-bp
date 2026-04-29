@@ -1,7 +1,7 @@
 {
   "type": "module",
   "dependencies": {
-    "@minecraft/server": "^2.6.0-beta.1.26.0-preview.28",
+    "@minecraft/server": "^2.9.0-beta.1.26.30-preview.21",
     "@minecraft/server-admin": "^1.0.0-beta.1.26.0-preview.28",
     "@minecraft/server-net": "^1.0.0-beta.1.26.0-preview.28",
     "@minecraft/server-ui": "^2.1.0-beta.1.26.0-preview.28",
@@ -13,6 +13,12 @@
     "compile": "bun run clean && bunx esbuild src/main.ts --platform=node --target=node18 --bundle --minify --format=esm --external:@minecraft/* --outfile=scripts/main.js",
     "build": "bun run compile && mkdir output; cp manifest.json output && cp -r scripts output && zip -9 -r output.zip output && rm -rf output",
     "watch": "bun run clean && bunx tsc --watch",
-    "clean": "rm -rf scripts output*"
+    "clean": "rm -rf scripts output*",
+    "lint": "eslint --fix src"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.2.0",
+    "typescript-eslint": "^8.58.2"
   }
 }

@@ -6,25 +6,25 @@ export default class EnchantInstance {
     private level = 1,
   ) {}
 
-  public SetTypeId(typeId: string) {
+  public SetTypeId(typeId: string): EnchantInstance {
     this.typeId = typeId;
 
     return this;
   }
-  public SetLevel(level: number) {
+  public SetLevel(level: number): EnchantInstance {
     this.level = level;
 
     return this;
   }
 
-  public GetTypeId() {
+  public GetTypeId(): string {
     return this.typeId;
   }
-  public GetLevel() {
+  public GetLevel(): number {
     return this.level;
   }
 
-  public Build() {
+  public Build(): Enchantment {
     return {
       level: this.level,
       type: new EnchantmentType(this.typeId),

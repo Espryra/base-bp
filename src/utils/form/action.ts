@@ -8,8 +8,6 @@ export default class ActionForm {
   public body?: string | string[];
   public buttons: ActionFormButton[] = [];
 
-  public constructor() {}
-
   public SetTitle(title: string): ActionForm {
     this.title = title;
 

@@ -8,8 +8,6 @@ export default class ModalForm {
   public submitButton?: string;
   public options: ModalFormOption[] = [];
 
-  public constructor() {}
-
   public SetTitle(title: string): ModalForm {
     this.title = title;
 

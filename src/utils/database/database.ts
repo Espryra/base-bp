@@ -10,11 +10,11 @@ export default class Database<T> {
 
   public constructor(
     private name: string,
-    private useCache: boolean = false,
+    private useCache = false,
     private host: Entity | World | ItemStack = world,
   ) {}
 
-  public Set(key: string, value?: Partial<T>) {
+  public Set(key: string, value?: Partial<T>): Database<T> {
     this.host.setDynamicProperty(
       this.FormatKey(key),
       !value ? undefined : JSON.stringify(value),
@@ -26,7 +26,7 @@ export default class Database<T> {
 
     return this;
   }
-  public Get(key: string) {
+  public Get(key: string): T | undefined {
     if (this.useCache) {
       const data = this.cache[key];
 
@@ -44,19 +44,19 @@ export default class Database<T> {
 
     return parsed;
   }
-  public Has(key: string) {
+  public Has(key: string): boolean {
     return this.Get(key) !== undefined;
   }
-  public Keys() {
+  public Keys(): string[] {
     return this.host
       .getDynamicPropertyIds()
       .filter((id) => id.startsWith(this.name))
       .map((id) => id.replace(`${this.name}:`, ""));
   }
-  public Values() {
+  public Values(): T[] {
     return this.Keys().map((key) => this.Get(key)!);
   }
-  public Entries() {
+  public Entries(): [string, T][] {
     const record: Record<string, T> = {};
 
     this.Keys().forEach((key) => {
@@ -65,7 +65,7 @@ export default class Database<T> {
 
     return Object.entries(record);
   }
-  public Clear() {
+  public Clear(): Database<T> {
     this.cache = {};
 
     this.Keys().forEach((key) => {
@@ -75,7 +75,7 @@ export default class Database<T> {
     return this;
   }
 
-  private FormatKey(key: string) {
+  private FormatKey(key: string): string {
     return `${this.name}:${key}`;
   }
 }

@@ -7,10 +7,8 @@ import {
 import CommandConfig from "../../lib/commands";
 import Command from "./command";
 
-export default class CommandHandler {
+export default abstract class CommandHandler {
   private static commands: Command[] = [];
-
-  private constructor() {}
 
   public static async Init(): Promise<void> {
     system.beforeEvents.startup.subscribe((event) =>

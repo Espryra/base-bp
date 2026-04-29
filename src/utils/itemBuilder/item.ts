@@ -1,10 +1,11 @@
 import { ItemComponentTypes, ItemLockMode, ItemStack } from "@minecraft/server";
 import type EnchantInstance from "./enchant";
+import type { PropertyType } from "./types";
 
 export default class ItemInstance {
   private nameTag?: string;
   private damage?: number;
-  private keepOnDeath: boolean = false;
+  private keepOnDeath = false;
   private lore?: string[];
   private lockMode: ItemLockMode = ItemLockMode.none;
   private enchants?: EnchantInstance[];
@@ -12,84 +13,84 @@ export default class ItemInstance {
 
   public constructor(
     private typeId: string,
-    private amount: number = 1,
+    private amount = 1,
   ) {}
 
-  public SetTypeId(typeId: string) {
+  public SetTypeId(typeId: string): ItemInstance {
     this.typeId = typeId;
 
     return this;
   }
-  public SetAmount(amount: number) {
+  public SetAmount(amount: number): ItemInstance {
     this.amount = amount;
 
     return this;
   }
-  public SetNameTag(nameTag: string) {
+  public SetNameTag(nameTag: string): ItemInstance {
     this.nameTag = nameTag;
 
     return this;
   }
-  public SetDamage(damage: number) {
+  public SetDamage(damage: number): ItemInstance {
     this.damage = damage;
 
     return this;
   }
-  public SetKeepOnDeath(keepOnDeath: boolean) {
+  public SetKeepOnDeath(keepOnDeath: boolean): ItemInstance {
     this.keepOnDeath = keepOnDeath;
 
     return this;
   }
-  public SetLore(lore: string[]) {
+  public SetLore(lore: string[]): ItemInstance {
     this.lore = lore;
 
     return this;
   }
-  public SetLockMode(lockMode: ItemLockMode) {
+  public SetLockMode(lockMode: ItemLockMode): ItemInstance {
     this.lockMode = lockMode;
 
     return this;
   }
-  public SetEnchants(enchants: EnchantInstance[]) {
+  public SetEnchants(enchants: EnchantInstance[]): ItemInstance {
     this.enchants = enchants;
 
     return this;
   }
-  public SetProperties(properties: Record<string, any>) {
+  public SetProperties(properties: Record<string, any>): ItemInstance {
     this.properties = properties;
 
     return this;
   }
 
-  public GetTypeId() {
+  public GetTypeId(): string {
     return this.typeId;
   }
-  public GetAmount() {
+  public GetAmount(): number {
     return this.amount;
   }
-  public GetNameTag() {
+  public GetNameTag(): string | undefined {
     return this.nameTag;
   }
-  public GetDamage() {
+  public GetDamage(): number | undefined {
     return this.damage;
   }
-  public GetKeepOnDeath() {
+  public GetKeepOnDeath(): boolean {
     return this.keepOnDeath;
   }
-  public GetLore() {
+  public GetLore(): string[] | undefined {
     return this.lore;
   }
-  public GetLockMode() {
+  public GetLockMode(): ItemLockMode {
     return this.lockMode;
   }
-  public GetEnchants() {
+  public GetEnchants(): EnchantInstance[] | undefined {
     return this.enchants;
   }
-  public GetProperties() {
+  public GetProperties(): Record<string, any> | undefined {
     return this.properties;
   }
 
-  public AddEnchant(enchant: EnchantInstance) {
+  public AddEnchant(enchant: EnchantInstance): ItemInstance {
     if (!this.enchants) {
       this.enchants = [];
     }
@@ -98,7 +99,7 @@ export default class ItemInstance {
 
     return this;
   }
-  public AddProperty(key: string, value: any) {
+  public AddProperty(key: string, value: PropertyType): ItemInstance {
     if (!this.properties) {
       this.properties = {};
     }
@@ -108,7 +109,7 @@ export default class ItemInstance {
     return this;
   }
 
-  public Build() {
+  public Build(): ItemStack {
     const item = new ItemStack(this.typeId, this.amount);
     const durability = item.getComponent(ItemComponentTypes.Durability);
     const enchanting = item.getComponent(ItemComponentTypes.Enchantable);

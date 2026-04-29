@@ -7,36 +7,36 @@ export default class CommandParameter {
   public constructor(
     private name: string,
     private type: CustomCommandParamType,
-    private required: boolean = false,
+    private required = false,
   ) {}
 
-  public SetName(name: string) {
+  public SetName(name: string): CommandParameter {
     this.name = name;
 
     return this;
   }
-  public SetType(type: CustomCommandParamType) {
+  public SetType(type: CustomCommandParamType): CommandParameter {
     this.type = type;
 
     return this;
   }
-  public SetRequired(required: boolean) {
+  public SetRequired(required: boolean): CommandParameter {
     this.required = required;
 
     return this;
   }
 
-  public GetName() {
+  public GetName(): string {
     return this.name;
   }
-  public GetType() {
+  public GetType(): CustomCommandParamType {
     return this.type;
   }
-  public GetRequired() {
+  public GetRequired(): boolean {
     return this.required;
   }
 
-  public Build() {
+  public Build(): CustomCommandParameter {
     return {
       name: this.name,
       type: this.type,
